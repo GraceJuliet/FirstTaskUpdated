@@ -1,0 +1,95 @@
+﻿<Window x:Class="FirstTaskUpdated.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FirstTaskUpdated"
+       xmlns:w="clr-namespace:FirstTaskUpdated.PasswordHelper"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="auto" Width="800">
+
+
+    <Window.Background>
+        <ImageBrush ImageSource="C:\Users\99002679\Desktop\Background_1.png"/>
+
+
+    </Window.Background>
+
+
+
+    <Window.Resources>
+        <Style x:Key="myStyle" TargetType="StackPanel">
+            <Setter Property="Background" Value="Transparent" />
+
+            <Setter Property="Margin" Value="4" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=chkBox, Path=IsChecked}" Value="false">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    
+    
+
+    <Grid>
+        <StackPanel   HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent">
+
+            <Border CornerRadius="5" BorderThickness="12" BorderBrush="White">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Background="White" Width="268" >
+
+                    <Image Source=" C:\Users\99002679\Desktop\logo1.jpg" Margin="0" Height="67"/>
+                    <Label Content="         Remote Expert Pathology" FontWeight="Black" Padding="10,0" Width="232" Height="25"></Label>
+                    <Label Margin="3" Height="4"></Label>
+                    <TextBlock Text="Login to access cases" Foreground="Gray" HorizontalAlignment="Center" Margin="3" Height="30"></TextBlock>
+                    <TextBlock Text="       USERNAME" Margin="3"  HorizontalAlignment="Center" FontWeight="Medium" FontSize="11" Height="21" Width="118" ></TextBlock>
+                    <TextBox Width="200" Margin="2"  Height="25"  Text="{Binding Name, Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                        <TextBlock Text="PASSWORD " TextAlignment="Center" FontWeight="Medium" FontSize="11" Height="15"/>
+                        <Button x:Name="ShowPassword" Background="Transparent" Width="30" Height="30" BorderBrush="Transparent" BorderThickness="0" Command="{Binding cmd}" CommandParameter="{Binding ElementName=ShowPassword, Path=Name}" Visibility="{Binding Showvisibility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Stretch" >
+                            <Image Source="C:\Users\99002679\Desktop\Integrated vin\showpassword.png" StretchDirection="UpOnly" />
+
+                        </Button>
+
+                        <Button Background="LightGray"  BorderBrush="Transparent" BorderThickness="0"  x:Name="HidePassword" Width="30" Height="30" Command="{Binding cmd}" CommandParameter="{Binding ElementName=HidePassword, Path=Name}" Visibility="{Binding Hidevisibility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <Image  Source="C:\Users\99002679\Desktop\Integrated vin\hidepassword.png"/>
+                        </Button>
+                    </StackPanel>
+                    <PasswordBox Width="200" Margin="2"  Height="25"  x:Name="pwdbox"  PasswordChar="*" Visibility="{Binding Pwd , Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}"  w:PasswordHelper.Attach="True" 
+         w:PasswordHelper.Password="{Binding Text, ElementName=MyTextBox, Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}"  ></PasswordBox>
+                    <TextBox x:Name="MyTextBox"  Width="200" Margin="2"  Height="25" Text="{Binding pwdbox, Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}"  Visibility="{Binding Txtbox, Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}"  />
+                    
+                    
+                    <StackPanel Style="{StaticResource myStyle}">
+                        
+                        <TextBlock Text="HOST ADDRESS"   Margin="3" HorizontalAlignment="Center" FontWeight="Medium" FontSize="11"></TextBlock>
+                        <TextBox Width="200" Margin="2"  Height="25" Text="11111"  TextAlignment="Center"></TextBox>
+                        <TextBlock Text="PORT NUMBER" Margin="3" HorizontalAlignment="Center" FontWeight="Medium" FontSize="11"></TextBlock>
+                        <TextBox Width="200" Margin="2" Text="111" TextAlignment="Center" Height="25" ></TextBox>
+
+                        <Label Margin="3"></Label>
+                    </StackPanel>
+
+
+                    <CheckBox Name="chkBox" HorizontalAlignment="Center" Margin="7" FontWeight="Medium" Height="22">Show hub details</CheckBox>
+                    <Button Name="login" HorizontalAlignment="Center" Width="60" Margin="6" Height="26" Content="Login" Background="LightGray" Command="{Binding cmd}" CommandParameter="{ Binding  ElementName=MyTextBox, Path=Text}">
+
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                    <Label Margin="3"></Label>
+
+                </StackPanel>
+
+
+
+
+
+            </Border>
+        </StackPanel>
+    </Grid>
+
+</Window>
